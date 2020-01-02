@@ -1,0 +1,58 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" bind="id" />
+        <div>我的id是：<span bind="id"></span></div>
+        <input type="text" bind="name" />
+        <div>我的Name是：<span bind="name"></span></div>
+        <div>
+            本地时间是: <time bind="time"></time>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div id="app2">
+        <input type="text" bind="name">
+        <div>
+            我是app2的Name: <span bind="name"></span>
+        </div>
+    </div>
+    <script src="./bind.js"></script>
+    <script>
+        let b = new Bind({
+            el: 'app',
+            data: {
+                id: '我是id',
+                name: '我是name',
+                time: new Date().toLocaleTimeString()
+            },
+            mounted() {
+                this.id = '我是新的id';
+                this.setTime();
+            },
+            methods: {
+                setTime() {
+                    setInterval(() => {
+                        this.time = new Date().toLocaleTimeString();
+                    }, 1000);
+                }
+            }
+        });
+        b.name = '我是新的name';
+
+        new Bind({
+            el: 'app2'
+        });
+    </script>
+</body>
+
+</html>
